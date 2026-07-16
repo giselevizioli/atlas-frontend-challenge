@@ -36,7 +36,7 @@ export default {
       this.loading = true
 
       try {
-        // const params =
+        // params
         const { data } = await professionalsApi.getProfessionals()
 
         this.professionals = data
