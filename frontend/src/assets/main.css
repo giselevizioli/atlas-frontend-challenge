@@ -1,0 +1,6 @@
+@import './base.css';
+@import 'tailwindcss';
+
+#app {
+  @apply max-w-7xl my-0 mx-auto p-8;
+}
