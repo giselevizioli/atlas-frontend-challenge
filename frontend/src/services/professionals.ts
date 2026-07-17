@@ -1,10 +1,10 @@
 import http from '@/services/http'
-import type { ProfessionalsResponse } from '@/types/ProfessionalsResponse'
+import type { ProfessionalsResponse, ProfessionalsFilters } from '@/types/ProfessionalsResponse'
 
 export default {
   // tipar params
-  async getProfessionals(params): Promise<ProfessionalsResponse> {
-    const response = await http.get<ProfessionalsResponse>('/professionals')
+  async getProfessionals(params: ProfessionalsFilters): Promise<ProfessionalsResponse> {
+    const response = await http.get<ProfessionalsResponse>('/professionals', { params })
 
     return response.data
   },

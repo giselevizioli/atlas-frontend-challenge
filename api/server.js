@@ -10,7 +10,14 @@ server.use(jsonServer.bodyParser);
 server.get('/professionals', (req, res) => {
   let professionals = router.db.get('professionals').value();
 
-  const { professionSlug, search, sort, page = 1, perPage = 12 } = req.query;
+  const {
+    professionSlug,
+    search,
+    sort,
+    page = 1,
+    perPage = 12,
+    citySlug
+  } = req.query;
 
   const order = req.query.order === 'desc' ? 'desc' : 'asc';
 
@@ -20,6 +27,15 @@ server.get('/professionals', (req, res) => {
 
     professionals = professionals.filter((item) =>
       slugs.includes(item.professionSlug)
+    );
+  }
+
+  // Filtragem múltipla por cidade
+  if (citySlug) {
+    const slugs = citySlug.split(',').map((item) => item.trim());
+
+    professionals = professionals.filter((item) =>
+      slugs.includes(item.citySlug)
     );
   }
 
@@ -61,6 +77,7 @@ server.get('/professionals', (req, res) => {
 
   // Paginação
   const total = professionals.length;
+  console.log('total: ', total);
   const currentPage = Number(page);
   const itemsPerPage = Number(perPage);
   const totalPages = Math.ceil(total / itemsPerPage);

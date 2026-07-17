@@ -61,66 +61,82 @@ const professions = [
 const cities = [
   {
     city: 'São Paulo',
+    citySlug: 'sao-paulo',
     state: 'SP'
   },
   {
     city: 'Campinas',
+    citySlug: 'campinas',
     state: 'SP'
   },
   {
     city: 'Santos',
+    citySlug: 'santos',
     state: 'SP'
   },
   {
     city: 'Rio de Janeiro',
+    citySlug: 'rio-de-janeiro',
     state: 'RJ'
   },
   {
     city: 'Niterói',
+    citySlug: 'niteroi',
     state: 'RJ'
   },
   {
     city: 'Belo Horizonte',
+    citySlug: 'belo-horizonte',
     state: 'MG'
   },
   {
     city: 'Uberlândia',
+    citySlug: 'uberlandia',
     state: 'MG'
   },
   {
     city: 'Curitiba',
+    citySlug: 'curitiba',
     state: 'PR'
   },
   {
     city: 'Londrina',
+    citySlug: 'londrina',
     state: 'PR'
   },
   {
     city: 'Florianópolis',
+    citySlug: 'florianopolis',
     state: 'SC'
   },
   {
     city: 'Joinville',
+    citySlug: 'joinville',
     state: 'SC'
   },
   {
     city: 'Porto Alegre',
+    citySlug: 'porto-alegre',
     state: 'RS'
   },
   {
     city: 'Brasília',
+    citySlug: 'brasilia',
     state: 'DF'
   },
   {
     city: 'Salvador',
+    citySlug: 'salvador',
     state: 'BA'
   },
   {
     city: 'Recife',
+    citySlug: 'recife',
     state: 'PE'
   },
   {
     city: 'Fortaleza',
+    citySlug: 'fortaleza',
     state: 'CE'
   }
 ];
@@ -161,6 +177,7 @@ for (let i = 1; i <= 500; i++) {
     phone: faker.phone.number(),
     email: faker.internet.email(),
     city: location.city,
+    citySlug: location.citySlug,
     state: location.state,
     description: faker.lorem.paragraphs(2),
     rating: faker.number.float({
@@ -180,7 +197,9 @@ fs.writeFileSync(
   './db.json',
   JSON.stringify(
     {
-      professionals
+      professions,
+      professionals,
+      cities
     },
     null,
     2
