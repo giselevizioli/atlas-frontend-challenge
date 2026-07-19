@@ -77,7 +77,6 @@ server.get('/professionals', (req, res) => {
 
   // Paginação
   const total = professionals.length;
-  console.log('total: ', total);
   const currentPage = Number(page);
   const itemsPerPage = Number(perPage);
   const totalPages = Math.ceil(total / itemsPerPage);
@@ -102,8 +101,22 @@ server.get('/professionals', (req, res) => {
   });
 });
 
+server.get('/professionals/:id', (req, res) => {
+  const id = Number(req.params.id);
+
+  const professional = router.db.get('professionals').find({ id }).value();
+
+  if (!professional) {
+    return res.status(404).json({
+      message: 'Profissional não encontrado'
+    });
+  }
+
+  res.json(professional);
+});
+
 server.use(router);
 
-server.listen(3000, () => {
-  console.log('🚀 API rodando em http://localhost:3000');
+server.listen(3001, () => {
+  console.log('🚀 API rodando em http://localhost:3001');
 });

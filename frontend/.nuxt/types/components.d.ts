@@ -16,22 +16,26 @@ type LazyComponent<T> = DefineComponent<HydrationStrategies, {}, {}, {}, {}, {},
 interface _GlobalComponents {
   Header: typeof import("../../app/components/header/Header.vue")['default']
   HeaderSearch: typeof import("../../app/components/header/Search.vue")['default']
-  IconsIconClose: typeof import("../../app/components/icons/IconClose.vue")['default']
-  IconsIconCommunity: typeof import("../../app/components/icons/IconCommunity.vue")['default']
-  IconsIconCompany: typeof import("../../app/components/icons/IconCompany.vue")['default']
-  IconsIconContact: typeof import("../../app/components/icons/IconContact.vue")['default']
-  IconsIconDocumentation: typeof import("../../app/components/icons/IconDocumentation.vue")['default']
-  IconsIconEcosystem: typeof import("../../app/components/icons/IconEcosystem.vue")['default']
-  IconsIconFilters: typeof import("../../app/components/icons/IconFilters.vue")['default']
-  IconsIconLocation: typeof import("../../app/components/icons/IconLocation.vue")['default']
-  IconsIconSearch: typeof import("../../app/components/icons/IconSearch.vue")['default']
-  IconsIconSupport: typeof import("../../app/components/icons/IconSupport.vue")['default']
-  IconsIconTooling: typeof import("../../app/components/icons/IconTooling.vue")['default']
+  IconsArrow: typeof import("../../app/components/icons/Arrow.vue")['default']
+  IconsClose: typeof import("../../app/components/icons/Close.vue")['default']
+  IconsCompany: typeof import("../../app/components/icons/Company.vue")['default']
+  IconsEmptyStar: typeof import("../../app/components/icons/EmptyStar.vue")['default']
+  IconsFilledStar: typeof import("../../app/components/icons/FilledStar.vue")['default']
+  IconsFilters: typeof import("../../app/components/icons/Filters.vue")['default']
+  IconsHalfStar: typeof import("../../app/components/icons/HalfStar.vue")['default']
+  IconsLocation: typeof import("../../app/components/icons/Location.vue")['default']
+  IconsMail: typeof import("../../app/components/icons/Mail.vue")['default']
+  IconsMoney: typeof import("../../app/components/icons/Money.vue")['default']
+  IconsPhone: typeof import("../../app/components/icons/Phone.vue")['default']
+  IconsSearch: typeof import("../../app/components/icons/Search.vue")['default']
+  IconsSort: typeof import("../../app/components/icons/Sort.vue")['default']
   ListingCard: typeof import("../../app/components/listing/Card.vue")['default']
   ListingCardSkelleton: typeof import("../../app/components/listing/CardSkelleton.vue")['default']
   ListingFiltersButton: typeof import("../../app/components/listing/FiltersButton.vue")['default']
   ListingFiltersModal: typeof import("../../app/components/listing/FiltersModal.vue")['default']
   ListingPagination: typeof import("../../app/components/listing/Pagination.vue")['default']
+  ListingRating: typeof import("../../app/components/listing/Rating.vue")['default']
+  ListingSortButton: typeof import("../../app/components/listing/SortButton.vue")['default']
   NuxtWelcome: typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']
   NuxtLayout: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']
   NuxtErrorBoundary: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']
@@ -58,22 +62,26 @@ interface _GlobalComponents {
   NuxtIsland: typeof import("../../node_modules/nuxt/dist/app/components/nuxt-island")['default']
   LazyHeader: LazyComponent<typeof import("../../app/components/header/Header.vue")['default']>
   LazyHeaderSearch: LazyComponent<typeof import("../../app/components/header/Search.vue")['default']>
-  LazyIconsIconClose: LazyComponent<typeof import("../../app/components/icons/IconClose.vue")['default']>
-  LazyIconsIconCommunity: LazyComponent<typeof import("../../app/components/icons/IconCommunity.vue")['default']>
-  LazyIconsIconCompany: LazyComponent<typeof import("../../app/components/icons/IconCompany.vue")['default']>
-  LazyIconsIconContact: LazyComponent<typeof import("../../app/components/icons/IconContact.vue")['default']>
-  LazyIconsIconDocumentation: LazyComponent<typeof import("../../app/components/icons/IconDocumentation.vue")['default']>
-  LazyIconsIconEcosystem: LazyComponent<typeof import("../../app/components/icons/IconEcosystem.vue")['default']>
-  LazyIconsIconFilters: LazyComponent<typeof import("../../app/components/icons/IconFilters.vue")['default']>
-  LazyIconsIconLocation: LazyComponent<typeof import("../../app/components/icons/IconLocation.vue")['default']>
-  LazyIconsIconSearch: LazyComponent<typeof import("../../app/components/icons/IconSearch.vue")['default']>
-  LazyIconsIconSupport: LazyComponent<typeof import("../../app/components/icons/IconSupport.vue")['default']>
-  LazyIconsIconTooling: LazyComponent<typeof import("../../app/components/icons/IconTooling.vue")['default']>
+  LazyIconsArrow: LazyComponent<typeof import("../../app/components/icons/Arrow.vue")['default']>
+  LazyIconsClose: LazyComponent<typeof import("../../app/components/icons/Close.vue")['default']>
+  LazyIconsCompany: LazyComponent<typeof import("../../app/components/icons/Company.vue")['default']>
+  LazyIconsEmptyStar: LazyComponent<typeof import("../../app/components/icons/EmptyStar.vue")['default']>
+  LazyIconsFilledStar: LazyComponent<typeof import("../../app/components/icons/FilledStar.vue")['default']>
+  LazyIconsFilters: LazyComponent<typeof import("../../app/components/icons/Filters.vue")['default']>
+  LazyIconsHalfStar: LazyComponent<typeof import("../../app/components/icons/HalfStar.vue")['default']>
+  LazyIconsLocation: LazyComponent<typeof import("../../app/components/icons/Location.vue")['default']>
+  LazyIconsMail: LazyComponent<typeof import("../../app/components/icons/Mail.vue")['default']>
+  LazyIconsMoney: LazyComponent<typeof import("../../app/components/icons/Money.vue")['default']>
+  LazyIconsPhone: LazyComponent<typeof import("../../app/components/icons/Phone.vue")['default']>
+  LazyIconsSearch: LazyComponent<typeof import("../../app/components/icons/Search.vue")['default']>
+  LazyIconsSort: LazyComponent<typeof import("../../app/components/icons/Sort.vue")['default']>
   LazyListingCard: LazyComponent<typeof import("../../app/components/listing/Card.vue")['default']>
   LazyListingCardSkelleton: LazyComponent<typeof import("../../app/components/listing/CardSkelleton.vue")['default']>
   LazyListingFiltersButton: LazyComponent<typeof import("../../app/components/listing/FiltersButton.vue")['default']>
   LazyListingFiltersModal: LazyComponent<typeof import("../../app/components/listing/FiltersModal.vue")['default']>
   LazyListingPagination: LazyComponent<typeof import("../../app/components/listing/Pagination.vue")['default']>
+  LazyListingRating: LazyComponent<typeof import("../../app/components/listing/Rating.vue")['default']>
+  LazyListingSortButton: LazyComponent<typeof import("../../app/components/listing/SortButton.vue")['default']>
   LazyNuxtWelcome: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/welcome.vue")['default']>
   LazyNuxtLayout: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-layout")['default']>
   LazyNuxtErrorBoundary: LazyComponent<typeof import("../../node_modules/nuxt/dist/app/components/nuxt-error-boundary.vue")['default']>

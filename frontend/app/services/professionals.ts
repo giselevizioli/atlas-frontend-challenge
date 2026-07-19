@@ -1,15 +1,23 @@
-import http from '@/services/http'
-import type { ProfessionalsResponse, ProfessionalsFilters } from '@/types/ProfessionalsResponse'
+import type {
+  ProfessionalsFilters,
+  ProfessionalsResponse
+} from '@/types/ProfessionalsResponse';
 
 export default {
-  // tipar params
-  async getProfessionals(params: ProfessionalsFilters): Promise<ProfessionalsResponse> {
-    const response = await http.get<ProfessionalsResponse>('/professionals', { params })
+  async getProfessionals(params: ProfessionalsFilters) {
+    const config = useRuntimeConfig();
 
-    return response.data
+    return $fetch<ProfessionalsResponse>('/professionals', {
+      baseURL: config.public.apiBase,
+      query: params
+    });
   },
 
-  getProfessional(id: number) {
-    return http.get(`/professionals/${id}`)
-  },
-}
+  async getProfessional(id: number) {
+    const config = useRuntimeConfig();
+
+    return $fetch(`/professionals/${id}`, {
+      baseURL: config.public.apiBase
+    });
+  }
+};

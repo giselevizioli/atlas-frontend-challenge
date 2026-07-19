@@ -157,6 +157,7 @@ const companies = [
 ];
 
 const professionals = [];
+const avatarCount = 32;
 
 for (let i = 1; i <= 500; i++) {
   const profession =
@@ -169,7 +170,9 @@ for (let i = 1; i <= 500; i++) {
     name: faker.person.fullName(),
     profession: profession.name,
     professionSlug: profession.slug,
-    avatar: faker.image.avatar(),
+    avatar: `/avatars/${String(
+      faker.number.int({ min: 1, max: avatarCount })
+    )}.webp`,
     price: faker.number.int({
       min: 3000,
       max: 25000
@@ -180,11 +183,7 @@ for (let i = 1; i <= 500; i++) {
     citySlug: location.citySlug,
     state: location.state,
     description: faker.lorem.paragraphs(2),
-    rating: faker.number.float({
-      min: 1,
-      max: 5,
-      fractionDigits: 1
-    }),
+    rating: faker.number.int({ min: 2, max: 10 }) / 2,
     age: faker.number.int({
       min: 18,
       max: 65

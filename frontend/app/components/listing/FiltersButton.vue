@@ -2,35 +2,24 @@
   <div>
     <button
       class="flex items-center gap-2 px-3 h-10 border border-cyan/25 rounded-sm cursor-pointer hover:shadow-[0_0_5px_0px_cyan] transition-shadow"
-      @click="toggleModal"
+      @click="store.setOpenedModal('filters')"
     >
-      <IconFilters />
+      <IconsFilters />
       <span class="text-white">FILTROS</span>
     </button>
-    <teleport to="body">
-      <FiltersModal v-if="showModal" @closeModal="showModal = false" />
+    <teleport to="#teleports">
+      <LazyListingFiltersModal v-if="store.openedModal === 'filters'" />
     </teleport>
   </div>
 </template>
 
 <script lang="ts">
-  import IconFilters from '@/components/icons/IconFilters.vue';
-  import FiltersModal from '@/components/listing/FiltersModal.vue';
+  import { useFiltersStore } from '@/stores/filters';
+
   export default {
-    components: {
-      IconFilters,
-      FiltersModal
-    },
-
-    data() {
-      return {
-        showModal: false
-      };
-    },
-
-    methods: {
-      toggleModal() {
-        this.showModal = !this.showModal;
+    computed: {
+      store() {
+        return useFiltersStore();
       }
     }
   };

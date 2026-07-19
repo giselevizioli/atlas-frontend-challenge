@@ -1,29 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&display=swap');
 @import 'tailwindcss';
-
-.rajdhani-regular {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 400;
-  font-style: normal;
-}
-
-.rajdhani-medium {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 500;
-  font-style: normal;
-}
-
-.rajdhani-semibold {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 600;
-  font-style: normal;
-}
-
-.rajdhani-bold {
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
-  font-style: normal;
-}
 
 .share-tech-mono-regular {
   font-family: 'Share Tech Mono', monospace;
@@ -32,7 +7,7 @@
 }
 
 body {
-  background: #020e14;
+  background: var(--color-dark-blue);
   min-height: 100vh;
 }
 
@@ -49,7 +24,7 @@ body {
   --color-blue: #00b8db;
   --color-petroleum-blue: #0c1426;
   --color-dark-blue: #020e14;
-  --color-gray: #64748b;
+  --color-gray: #90a7c9;
   --color-bluish-gray: #315264;
 }
 
@@ -70,7 +45,7 @@ body {
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: var(--color-petroleum-blue/50);
+  background: var(--color-petroleum-blue);
   border-radius: 9999px;
 }
 

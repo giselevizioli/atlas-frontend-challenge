@@ -13,20 +13,20 @@
 </template>
 
 <script lang="ts">
-export default {
-  props: {
-    width: {
-      type: String,
-      default: '20',
-    },
-    height: {
-      type: String,
-      default: '20',
-    },
-    color: {
-      type: String,
-      default: '#22D3EE',
-    },
-  },
-}
+  export default {
+    props: {
+      width: {
+        type: String,
+        default: '20'
+      },
+      height: {
+        type: String,
+        default: '20'
+      },
+      color: {
+        type: String,
+        default: '#22d3ee66'
+      }
+    }
+  };
 </script>

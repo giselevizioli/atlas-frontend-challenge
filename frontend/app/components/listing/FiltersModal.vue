@@ -13,7 +13,7 @@
           class="cursor-pointer"
           @click="closeModal"
         >
-          <IconClose width="24" height="24" />
+          <IconsClose width="24" height="24" />
         </button>
       </div>
       <div
@@ -82,15 +82,10 @@
 </template>
 
 <script lang="ts">
-  import { useProfessionalsStore } from '@/stores/professionals';
+  import { useFiltersStore } from '@/stores/filters';
   import { updateRouteQuery } from '@/helpers/updateRouteQuery';
-  import IconClose from '@/components/icons/IconClose.vue';
 
   export default {
-    components: {
-      IconClose
-    },
-
     data() {
       return {
         selectedProfessions: [],
@@ -102,7 +97,7 @@
 
     computed: {
       store() {
-        return useProfessionalsStore();
+        return useFiltersStore();
       },
       professions() {
         return this.store.professions;
@@ -130,7 +125,7 @@
       },
 
       closeModal() {
-        this.$emit('closeModal');
+        this.store.setOpenedModal('');
       },
 
       handleSearch() {

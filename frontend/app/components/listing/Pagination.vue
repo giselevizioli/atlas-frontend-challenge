@@ -14,18 +14,17 @@
 </template>
 
 <script lang="ts">
-  import { useProfessionalsStore } from '@/stores/professionals';
   import { updateRouteQuery } from '@/helpers/updateRouteQuery';
 
   export default {
-    computed: {
-      store() {
-        return useProfessionalsStore();
-      },
-      pagination() {
-        return this.store.pagination;
-      },
+    props: {
+      pagination: {
+        type: Object,
+        required: true
+      }
+    },
 
+    computed: {
       visiblePages() {
         const totalPages = this.pagination.totalPages;
         const currentPage = this.pagination.page;
@@ -62,6 +61,11 @@
       changePage(page: number) {
         updateRouteQuery({
           page
+        });
+
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
         });
       }
     }

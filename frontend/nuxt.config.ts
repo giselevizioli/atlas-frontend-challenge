@@ -4,9 +4,14 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
+  runtimeConfig: {
+    public: {
+      apiBase: 'http://localhost:3001'
+    }
+  },
 
   devServer: {
-    port: 3001
+    port: 3000
   },
 
   modules: [
@@ -14,11 +19,28 @@ export default defineNuxtConfig({
     '@nuxt/image',
     '@nuxt/test-utils',
     '@pinia/nuxt',
-    '@nuxtjs/google-fonts'
-    // '@nuxtjs/seo'
+    '@nuxt/fonts'
   ],
 
+  fonts: {
+    families: [
+      {
+        name: 'Share Tech Mono',
+        provider: 'google',
+        weights: ['400', '500', '600', '700']
+      }
+    ]
+  },
+
   css: ['~/assets/css/main.css'],
+
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'pt-BR'
+      }
+    }
+  },
 
   vite: {
     plugins: [tailwindcss()]

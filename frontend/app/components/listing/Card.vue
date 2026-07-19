@@ -1,5 +1,6 @@
 <template>
-  <div
+  <NuxtLink
+    :to="`/professionals/${professional.id}`"
     class="p-4 rounded-sm bg-petroleum-blue flex flex-col border border-cyan/17 relative"
   >
     <div class="firulinha">
@@ -16,98 +17,117 @@
         class="border-t border-l border-blue/60 size-2 absolute bottom-px right-px rotate-180"
       />
     </div>
-    <div class="flex gap-5">
-      <div class="size-24 relative">
-        <div class="firulinha">
-          <div
-            class="bg-petroleum-blue size-4 absolute -top-2.25 -right-2 rotate-45"
-          ></div>
-          <div
-            class="bg-petroleum-blue size-4 absolute -bottom-2.25 -left-2 rotate-45"
-          ></div>
+    <div class="flex flex-col gap-4">
+      <div class="flex gap-4">
+        <div class="size-24 min-h-24 min-w-24 relative">
+          <div class="firulinha">
+            <div
+              class="bg-petroleum-blue size-4 absolute -top-2.25 -right-2 rotate-45"
+            ></div>
+            <div
+              class="bg-petroleum-blue size-4 absolute -bottom-2.25 -left-2 rotate-45"
+            ></div>
+          </div>
+          <NuxtImg
+            :src="professional.avatar"
+            :loading="index === 0 ? 'eager' : 'lazy'"
+            :fetchpriority="index === 0 ? 'high' : 'low'"
+            width="120"
+            height="120"
+            :alt="`Foto de ${professional.name}`"
+            class="size-24 object-cover bg-bluish-gray"
+          />
         </div>
-        <img
-          :src="professional.avatar"
-          :alt="`Foto de ${professional.name}`"
-          class="size-24 object-cover bg-bluish-gray"
-          loading="lazy"
-          decoding="async"
-        />
-      </div>
-      <div class="flex flex-col text-white">
-        <h2
-          class="text-lg font-bold font-[Rajdhani] leading-tight tracking-wide uppercase"
-        >
-          {{ professional.name }}
-        </h2>
-        <p class="mt-0.5 leading-tight text-cyan/80">
-          {{ professional.profession }}
-        </p>
-        <div class="flex items-center gap-1.5 mt-1.5">
-          <IconCompany />
-          <span
-            class="text-sm font-semibold tracking-wider text-gray font-[Rajdhani]"
+        <div>
+          <h2
+            class="text-white text-lg font-bold leading-tight tracking-wide uppercase"
           >
+            {{ professional.name }}
+          </h2>
+          <p class="mt-0.5 leading-tight text-cyan/80">
+            {{ professional.profession }}
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-col">
+        <div class="flex items-center gap-1.5">
+          <IconsCompany />
+          <span class="text-sm font-semibold tracking-wider text-gray">
             {{ professional.company }}
           </span>
         </div>
         <div
           class="text-sm flex gap-1.5 items-center mt-1.5 text-gray tracking-[-1px]"
         >
-          <IconLocation />
+          <IconsLocation />
           <span>
             {{ professional.city }}-{{ professional.state }}
             <span class="text-cyan-900">|</span>
             {{ professional.age }}y
           </span>
         </div>
+        <div
+          class="flex gap-1.5 items-center text-gray mt-1.5 tracking-[-1px] text-sm"
+        >
+          <IconsPhone />
+          <span>
+            {{ professional.phone }}
+          </span>
+        </div>
+        <div
+          class="flex gap-1.5 items-center text-gray mt-1.5 tracking-[-1px] text-sm"
+        >
+          <IconsMail />
+          <span>
+            {{ professional.email }}
+          </span>
+        </div>
       </div>
     </div>
     <hr class="my-4 text-blue/70" />
-    <div class="font-sans text-sm text-gray h-22.5">
-      <p class="leading-relaxed line-clamp-4">{{ professional.description }}</p>
-    </div>
-    <div
-      class="bg-cyan/7 rounded-sm border border-cyan/27 p-3 flex items-center justify-between gap-3 mt-4"
-    >
-      <div class="flex flex-col gap-1">
-        <p class="tracking-widest text-cyan/40 text-xs">PRETENSÃO // MÊS</p>
-        <p
-          class="text-white text-[18px] font-bold leading-none tracking-wide font-[Rajdhani]"
-        >
-          R$ {{ professional.price }}
+    <div class="flex flex-col justify-between h-full">
+      <div class="font-sans text-sm text-gray h-17">
+        <p class="leading-relaxed line-clamp-3">
+          {{ professional.description }}
         </p>
-        <p class="text-cyan/90 text-xs">AVALIAÇÃO: {{ professional.rating }}</p>
       </div>
-      <button
-        class="cursor-pointer rounded-sm flex items-center gap-2 text-sm text-cyan/90 border bg-cyan/7 border-cyan/30 font-semibold tracking-widest px-4 py-2.5 transition-all duration-200 hover:shadow-[0_0_5px_0px_cyan]"
+      <div
+        class="bg-cyan/7 rounded-sm border border-cyan/27 p-3 flex items-center justify-between gap-3 mt-4"
       >
-        <IconContact />
-        <span>CONTATAR</span>
-      </button>
+        <div class="flex flex-col gap-1">
+          <div class="flex items-center gap-1">
+            <IconsMoney />
+            <span
+              class="text-white text-lg font-bold leading-none tracking-wide"
+            >
+              R${{ professional.price }}
+            </span>
+          </div>
+          <div class="text-cyan/90 text-xs">
+            <ListingRating :rating="professional.rating" starSize="20" />
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </NuxtLink>
 </template>
 
 <script lang="ts">
   import type { PropType } from 'vue';
   import type { ProfessionalCard } from '@/types/professional';
-  import IconCompany from '@/components/icons/IconCompany.vue';
-  import IconLocation from '@/components/icons/IconLocation.vue';
-  import IconContact from '@/components/icons/IconContact.vue';
 
   export default {
     props: {
       professional: {
         type: Object as PropType<ProfessionalCard>,
         required: true
+      },
+      index: {
+        type: Number,
+        default: 1
       }
     },
 
-    components: {
-      IconCompany,
-      IconLocation,
-      IconContact
-    }
+    methods: {}
   };
 </script>

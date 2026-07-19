@@ -15,14 +15,14 @@ import { klona } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_mo
 import defu, { defuFn } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/defu/dist/defu.mjs';
 import { snakeCase } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/scule/dist/index.mjs';
 import { createHead as createHead$1, propsToString, renderSSRHead } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/@unhead/vue/node_modules/unhead/dist/server.mjs';
+import { createStorage, prefixStorage } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/unstorage/dist/index.mjs';
+import unstorage_47drivers_47fs from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/unstorage/drivers/fs.mjs';
+import file_58_47_47_47C_58_47repos_47atlas_45frontend_45challenge_47frontend_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js';
 import { stringify, uneval } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/devalue/index.js';
 import { isVNode, isRef, toValue } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/vue/index.mjs';
 import { createHooks } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/nitropack/node_modules/hookable/dist/index.mjs';
 import { createFetch, Headers as Headers$1 } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/ofetch/dist/node.mjs';
 import { fetchNodeRequestHandler, callNodeRequestHandler } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/node-mock-http/dist/index.mjs';
-import { createStorage, prefixStorage } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/unstorage/dist/index.mjs';
-import unstorage_47drivers_47fs from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/unstorage/drivers/fs.mjs';
-import file_58_47_47_47C_58_47repos_47atlas_45frontend_45challenge_47frontend_47node_modules_47_64nuxt_47nitro_45server_47dist_47runtime_47utils_47cache_45driver_46js from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/@nuxt/nitro-server/dist/runtime/utils/cache-driver.js';
 import { digest, hash as hash$1 } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/ohash/dist/index.mjs';
 import { toRouteMatcher, createRouter } from 'file://C:/repos/atlas-frontend-challenge/frontend/node_modules/radix3/dist/index.mjs';
 import { readFile } from 'node:fs/promises';
@@ -640,6 +640,14 @@ const _inlineRuntimeConfig = {
       "/__nuxt_error": {
         "cache": false
       },
+      "/_fonts/**": {
+        "headers": {
+          "cache-control": "public, max-age=31536000, immutable"
+        },
+        "cache": {
+          "maxAge": 31536000
+        }
+      },
       "/_nuxt/builds/meta/**": {
         "headers": {
           "cache-control": "public, max-age=31536000, immutable"
@@ -652,7 +660,9 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {},
+  "public": {
+    "apiBase": "http://localhost:3001"
+  },
   "ipx": {
     "baseURL": "/_ipx",
     "alias": {},
@@ -2063,7 +2073,7 @@ const _tp9mYWJA4SkT60Ys37BrohNud_4fYU5H4i2J2FY6A = (function(nitro) {
 
 const rootDir = "C:/repos/atlas-frontend-challenge/frontend";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
+const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[],"htmlAttrs":{"lang":"pt-BR"}};
 
 const appRootTag = "div";
 
@@ -2179,7 +2189,7 @@ function readAsset (id) {
   return promises.readFile(resolve$1(serverDir, assets[id].path))
 }
 
-const publicAssetBases = {"/_nuxt/builds/meta/":{"maxAge":31536000},"/_nuxt/builds/":{"maxAge":1}};
+const publicAssetBases = {"/_nuxt/builds/meta/":{"maxAge":31536000},"/_nuxt/builds/":{"maxAge":1},"/_fonts/":{"maxAge":31536000}};
 
 function isPublicAssetURL(id = '') {
   if (assets[id]) {
@@ -2299,7 +2309,9 @@ function computeIslandHash(name, filteredProps, context, source) {
   return hash$1([name, filteredProps, context, source]).replace(/[-_]/g, "");
 }
 
-const NUXT_RUNTIME_PAYLOAD_EXTRACTION = false;
+const NUXT_PAYLOAD_INLINE = false;
+
+const payloadCache = useStorage("cache:nuxt:payload") ;
 
 // @__NO_SIDE_EFFECTS__
 function createHead(options = {}) {
@@ -2803,6 +2815,7 @@ const handlers = [
   { route: '/__nuxt_error', handler: _lazy_jMdZ4S, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_island/**', handler: handler$1, lazy: false, middleware: false, method: undefined },
   { route: '/_ipx/**', handler: _nCcVZy, lazy: false, middleware: false, method: undefined },
+  { route: '/_fonts/**', handler: _lazy_jMdZ4S, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_jMdZ4S, lazy: true, middleware: false, method: undefined }
 ];
 
@@ -3135,6 +3148,7 @@ const HAS_APP_TELEPORTS = !!(appTeleportAttrs.id);
 const APP_TELEPORT_OPEN_TAG = HAS_APP_TELEPORTS ? `<${appTeleportTag}${propsToString(appTeleportAttrs)}>` : "";
 const APP_TELEPORT_CLOSE_TAG = HAS_APP_TELEPORTS ? `</${appTeleportTag}>` : "";
 const PAYLOAD_URL_RE = /^[^?]*\/_payload.json(?:\?.*)?$/ ;
+const PAYLOAD_FILENAME = "_payload.json" ;
 const handler = defineRenderHandler((event) => {
 	
 	const ssrError = event.path.startsWith("/__nuxt_error") ? getQuery$1(event) : null;
@@ -3174,13 +3188,21 @@ async function renderRoute(event, ssrError) {
 		ssrContext.noSSR = true;
 	}
 	
-	!ssrContext.noSSR && (NUXT_RUNTIME_PAYLOAD_EXTRACTION);
-	const isRenderingPayload = (routeOptions.prerender) && PAYLOAD_URL_RE.test(ssrContext.url);
+	const _PAYLOAD_EXTRACTION = !ssrContext.noSSR && ((routeOptions.isr || routeOptions.cache));
+	
+	
+	
+	const _PAYLOAD_INLINE = !_PAYLOAD_EXTRACTION || NUXT_PAYLOAD_INLINE;
+	const isRenderingPayload = (_PAYLOAD_EXTRACTION || routeOptions.prerender) && PAYLOAD_URL_RE.test(ssrContext.url);
 	if (isRenderingPayload) {
 		const url = ssrContext.url.substring(0, ssrContext.url.lastIndexOf("/")) || "/";
 		ssrContext.url = url;
 		event._path = event.node.req.url = url;
+		if (payloadCache && await payloadCache.hasItem(url + ".json")) {
+			return payloadCache.getItem(url + ".json");
+		}
 	}
+	const payloadURL = _PAYLOAD_EXTRACTION ? joinURL(ssrContext.runtimeConfig.app.cdnURL || ssrContext.runtimeConfig.app.baseURL, ssrContext.url.replace(/\?.*$/, ""), PAYLOAD_FILENAME) + "?" + ssrContext.runtimeConfig.app.buildId : undefined;
 	
 	const renderer = await getRenderer(ssrContext);
 	const _rendered = await renderer.renderToString(ssrContext).catch(async (error) => {
@@ -3212,11 +3234,31 @@ async function renderRoute(event, ssrError) {
 	
 	if (isRenderingPayload) {
 		const response = renderPayloadResponse(ssrContext);
+		if (payloadCache) {
+			await payloadCache.setItem(ssrContext.url + ".json", response);
+		}
 		return response;
+	}
+	if (_PAYLOAD_EXTRACTION) {
+		
+		
+		if (payloadCache) {
+			await payloadCache.setItem((ssrContext.url === "/" ? "/" : ssrContext.url.replace(/\/$/, "")) + ".json", renderPayloadResponse(ssrContext));
+		}
 	}
 	const NO_SCRIPTS = routeOptions.noScripts;
 	
 	const { styles, scripts } = getRequestDependencies(ssrContext, renderer.rendererContext);
+	
+	
+	if (_PAYLOAD_EXTRACTION && !_PAYLOAD_INLINE && !NO_SCRIPTS) {
+		ssrContext.head.push({ link: [{
+			rel: "preload",
+			as: "fetch",
+			crossorigin: "anonymous",
+			href: payloadURL
+		} ] }, headEntryOptions);
+	}
 	
 	if (inlinedStyles.length) {
 		ssrContext.head.push({ style: inlinedStyles });
@@ -3251,10 +3293,14 @@ async function renderRoute(event, ssrError) {
 		ssrContext.head.push({ link: getPreloadLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
 		ssrContext.head.push({ link: getPrefetchLinks(ssrContext, renderer.rendererContext) }, headEntryOptions);
 		
-		ssrContext.head.push({ script: renderPayloadJsonScript({
+		ssrContext.head.push({ script: _PAYLOAD_INLINE ? renderPayloadJsonScript({
 			ssrContext,
 			data: ssrContext.payload
-		})   }, {
+		})  : renderPayloadJsonScript({
+			ssrContext,
+			data: splitPayload(ssrContext).initial,
+			src: payloadURL
+		})  }, {
 			...headEntryOptions,
 			
 			tagPosition: "bodyClose",

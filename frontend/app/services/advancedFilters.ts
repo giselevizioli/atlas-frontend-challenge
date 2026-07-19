@@ -1,16 +1,15 @@
-import http from '@/services/http'
-import type { Profession, City } from '@/types/profession'
+import type { Profession, City } from '@/types/profession';
 
 export default {
   async getProfessions(): Promise<Profession[]> {
-    const response = await http.get<Profession[]>('/professions')
-
-    return response.data
+    const config = useRuntimeConfig();
+    return await $fetch<Profession[]>('/professions', {
+      baseURL: config.public.apiBase
+    });
   },
 
   async getCities(): Promise<Profession[]> {
-    const response = await http.get<City[]>('/cities')
-
-    return response.data
-  },
-}
+    const config = useRuntimeConfig();
+    return await $fetch<City[]>('/cities', { baseURL: config.public.apiBase });
+  }
+};
