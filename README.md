@@ -158,3 +158,11 @@ ChatGPT:
 Figma AI:
 
 - Geração do layout inicial da interface
+
+## Deploy
+
+Frontend
+https://giselevizioli-atlas-frontend-challe.vercel.app/
+
+API
+https://atlas-frontend-challenge.onrender.com/
