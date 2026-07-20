@@ -123,17 +123,25 @@ Comportamento de priorização do carregamento das imagens do primeiro card em r
 ### API:
 
 `git clone https://github.com/giselevizioli/atlas-frontend-challenge.git`
+
 `cd atlas-frontend-challenge`
+
 `cd api`
+
 `npm i`
+
 `node generator.js`
+
 `node server.js`
 
 ### Front:
 
 `cd frontend`
+
 `npm i`
+
 `npm run build`
+
 `npm run preview`
 
 ## Uso de IA
