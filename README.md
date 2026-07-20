@@ -130,8 +130,6 @@ Comportamento de priorização do carregamento das imagens do primeiro card em r
 
 `npm i`
 
-`node generator.js`
-
 `node server.js`
 
 ### Front:
