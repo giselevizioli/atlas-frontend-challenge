@@ -1,17 +1,23 @@
+import type { ProfessionalsFilters } from '@/types';
+import type { LocationQueryRaw } from 'vue-router';
+
 export interface UpdateQueryOptions {
   resetPage?: boolean;
 }
 
-export function updateRouteQuery(params, options = {}) {
+export function updateRouteQuery(
+  params: ProfessionalsFilters,
+  options: UpdateQueryOptions = {}
+) {
   const router = useRouter();
   const route = useRoute();
 
-  const query = {
+  const query: LocationQueryRaw = {
     ...route.query,
     ...params
   };
 
-  Object.keys(query).forEach((key) => {
+  (Object.keys(query) as Array<keyof typeof query>).forEach((key) => {
     const value = query[key];
 
     if (

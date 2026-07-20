@@ -20,7 +20,8 @@
         class="p-4 w-full overflow-y-auto md:h-115 flex flex-col gap-4 scrollbar"
       >
         <section
-          v-if="professions && professions.length > 0"
+          v-if="professions?.length > 0"
+          data-testid="professionsWrapper"
           class="professions-section"
         >
           <p class="uppercase text-bluish-gray font-medium">profissão:</p>
@@ -41,7 +42,11 @@
             </label>
           </div>
         </section>
-        <section v-if="cities && cities.length > 0" class="cities-section">
+        <section
+          v-if="cities?.length > 0"
+          data-testid="CitiesWrapper"
+          class="cities-section"
+        >
           <p class="uppercase text-bluish-gray font-medium">cidade:</p>
           <div
             v-for="city in cities"
@@ -86,7 +91,10 @@
   import { updateRouteQuery } from '@/helpers/updateRouteQuery';
 
   export default {
-    data() {
+    data(): {
+      selectedProfessions: string[];
+      selectedCities: string[];
+    } {
       return {
         selectedProfessions: [],
         selectedCities: []

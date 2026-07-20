@@ -1,6 +1,7 @@
 import type {
   ProfessionalsFilters,
-  ProfessionalsResponse
+  ProfessionalsResponse,
+  Professional
 } from '@/types/ProfessionalsResponse';
 
 export default {
@@ -16,7 +17,7 @@ export default {
   async getProfessional(id: number) {
     const config = useRuntimeConfig();
 
-    return $fetch(`/professionals/${id}`, {
+    return $fetch<Professional>(`/professionals/${id}`, {
       baseURL: config.public.apiBase
     });
   }

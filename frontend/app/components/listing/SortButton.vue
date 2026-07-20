@@ -7,33 +7,43 @@
       <IconsSort />
       <span class="text-white">Ordenar</span>
     </button>
-    <div v-if="store.openedModal === 'sort'">
-      <teleport to="#teleports">
+    <Transition
+      enter-active-class="transition-all duration-75 ease-out"
+      enter-from-class="opacity-0 -translate-y-2"
+      enter-to-class="opacity-100 translate-y-0"
+      leave-active-class="transition-all duration-100 ease-in"
+      leave-from-class="opacity-100 translate-y-0"
+      leave-to-class="opacity-0 -translate-y-2"
+    >
+      <div v-if="store.openedModal === 'sort'">
+        <teleport to="#teleports">
+          <div
+            class="w-full h-full bg-black/80 fixed top-0 left-0"
+            @click.self="store.setOpenedModal('')"
+          />
+        </teleport>
         <div
-          class="w-full h-full bg-black/80 fixed top-0 left-0"
-          @click.self="store.setOpenedModal('')"
-        />
-      </teleport>
-      <div
-        class="absolute w-max bg-petroleum-blue rounded-sm right-0 flex flex-col z-10"
-      >
-        <button
-          v-for="field in sortFields"
-          :key="field.name"
-          class="text-gray font-medium w-full py-3 px-4 uppercase cursor-pointer not-last:border-b not-last:border-b-cyan/10 hover:bg-cyan/8 transition-colors"
-          :class="{ 'bg-cyan/8': isSelected(field) }"
-          @click="sort(field)"
+          class="absolute w-max bg-petroleum-blue rounded-sm right-0 flex flex-col z-10"
         >
-          {{ field.name }}
-        </button>
+          <button
+            v-for="field in sortFields"
+            :key="field.name"
+            class="text-gray font-medium w-full py-3 px-4 uppercase cursor-pointer not-last:border-b not-last:border-b-cyan/10 hover:bg-cyan/8 transition-colors"
+            :class="{ 'bg-cyan/8': isSelected(field) }"
+            @click="sort(field)"
+          >
+            {{ field.name }}
+          </button>
+        </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
 
-<script>
+<script lang="ts">
   import { useFiltersStore } from '@/stores/filters';
   import { updateRouteQuery } from '@/helpers/updateRouteQuery';
+  import type { SortFieldObject } from '@/types/professional';
 
   export default {
     data() {
@@ -65,12 +75,12 @@
     },
 
     methods: {
-      isSelected(field) {
+      isSelected(field: SortFieldObject) {
         return (
           this.store.sort === field.sort && this.store.order === field.order
         );
       },
-      sort(field) {
+      sort(field: SortFieldObject) {
         document.body.style.overflow = '';
 
         updateRouteQuery({

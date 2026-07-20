@@ -29,7 +29,9 @@
   import { updateRouteQuery } from '@/helpers/updateRouteQuery';
 
   export default {
-    data() {
+    data(): {
+      isFocused: boolean;
+    } {
       return {
         isFocused: false
       };

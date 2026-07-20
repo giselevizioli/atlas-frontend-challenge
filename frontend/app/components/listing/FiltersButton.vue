@@ -8,7 +8,16 @@
       <span class="text-white">FILTROS</span>
     </button>
     <teleport to="#teleports">
-      <LazyListingFiltersModal v-if="store.openedModal === 'filters'" />
+      <Transition
+        enter-active-class="duration-200 ease-out"
+        enter-from-class="opacity-0 scale-95 translate-y-2"
+        enter-to-class="opacity-100 scale-100 translate-y-0"
+        leave-active-class="duration-150 ease-in"
+        leave-from-class="opacity-100 scale-100 translate-y-0"
+        leave-to-class="opacity-0 scale-95 translate-y-2"
+      >
+        <LazyListingFiltersModal v-if="store.openedModal === 'filters'" />
+      </Transition>
     </teleport>
   </div>
 </template>

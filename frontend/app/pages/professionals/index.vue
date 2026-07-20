@@ -1,8 +1,8 @@
 <template>
   <div>
     <Header :showSearch="true" />
-    <div v-if="error" class="px-8 w-full mx-auto max-w-7xl">
-      Ocorreu um erro ao carregar os profissionais.
+    <div v-if="error" class="px-8 w-full mx-auto max-w-7xl text-white">
+      Ocorreu um erro ao carregar os profissionais. Tente novamente.
     </div>
     <main v-else class="px-8 w-full mx-auto max-w-7xl">
       <div class="mb-4 w-full flex justify-between md:justify-normal">
@@ -101,12 +101,4 @@
 
   const professionals = computed(() => data.value?.data ?? []);
   const pagination = computed(() => data.value?.pagination);
-
-  onMounted(() => {
-    console.log('Listing mounted');
-  });
-
-  onUnmounted(() => {
-    console.log('unmounted');
-  });
 </script>
